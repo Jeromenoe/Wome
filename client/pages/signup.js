@@ -11,18 +11,25 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRouter } from 'next/router'
+import axios from 'axios';
+
 
 const theme = createTheme();
 
 export default function SignUp() {
 	const router = useRouter()
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
+		try {
+			await axios.post('http://localhost:3001/auth/signup', {
+				email: data.get('email'),
+				password: data.get('password')
+			});
+			router.push('signin')
+		} catch (error) {
+			return <div>An error occured (token)</div>;
+		}
 	};
 
 	const goToSignIn = (e) => {
