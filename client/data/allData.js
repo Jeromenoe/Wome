@@ -14,7 +14,7 @@ export default [
         image: imgs.yoga,
         title: 'Tips and tricks to write good code',
         category: 'Tips',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque ea, ab aperiam necessitatibus adipisci sunt facilis itaque non enim est!'
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elitLorem ipsum dolor sit amet, consectetur adipisicing elit. Neque ea, ab aperiam necessitatibus adipisci sunt facilis itaque non enim est!'
     },
     {
         id:2,

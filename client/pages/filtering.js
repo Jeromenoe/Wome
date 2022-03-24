@@ -2,6 +2,8 @@ import { useState } from 'react';
 import items from '../data/allData';
 import Menu from '../components/Menu';
 import Button from '../components/Button';
+import Header from '../components/Header';
+
 
 const allCategories = ['All', ...new Set(items.map(item => item.category))];
 
@@ -25,20 +27,23 @@ function App() {
 
 
 	return (
-		<div className="App">
+		<>
+		<Header />
+			<div className="App">
 
-			<div className="title">
-				<h1>
-					Portfolio
-					<span> Filter</span>
-				</h1>
+				<div className="title">
+					<h1>
+						Portfolio
+						<span> Filter</span>
+					</h1>
+				</div>
+
+
+				<Button button={buttons} filter={filter} />
+				<Menu menuItem={menuItem} />
+
 			</div>
-
-
-			<Button button={buttons} filter={filter} />
-			<Menu menuItem={menuItem} />
-
-		</div>
+		</>
 	);
 }
 
