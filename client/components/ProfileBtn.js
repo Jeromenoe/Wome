@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ProfileDetails from "./ProfileDetails";
 
 const ProfileBtn = () => {
+	const [menuVisible, setMenuVisible] = useState(false);
 	const showMenu = () => {
-		console.log('object');
+		setMenuVisible(!menuVisible);
 	}
 	return (
 		<>
@@ -13,13 +15,16 @@ const ProfileBtn = () => {
 					<div className='bar'></div>
 					<div className='bar'></div>
 				</div>
-				<AccountCircleIcon style={{ color: '#888', fontSize: '34px' }} />
+				<AccountCircleIcon style={{ color: '#333', fontSize: '34px' }} />
 			</div>
+			{menuVisible &&
+				<ProfileDetails />
+			}
 			<style jsx>{`
 				.profile-icon {
 					display: flex;
 					background-color: white;
-					padding: 5px 10px 5px 10px;
+					padding: 3px 10px 3px 10px;
 					border-radius: 26px;
 					cursor: pointer;
 				}
@@ -32,6 +37,7 @@ const ProfileBtn = () => {
 					width: 15px;
 					background-color: #333;
 					margin-top: 4px;
+					border-radius: 4px;
 				}
 			`}</style>
 		</>

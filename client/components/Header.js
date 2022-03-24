@@ -15,8 +15,8 @@ const Header = (props) => {
 		<>
 			<div className="header-container">
 				<div className="logo-container">
-					<div onClick={goToHome} style={{cursor: 'pointer'}}>
-						<Image src='/img/logo_wome.png' alt="" width={130} height={45} />
+					<div className="img-color" onClick={goToHome} style={{cursor: 'pointer'}}>
+						<Image  src='/img/logo_wome.png' alt="" width={130} height={45} />
 					</div>
 
 				</div>
@@ -37,7 +37,7 @@ const Header = (props) => {
 			.bar {
 				width: 100%;
 				height: 1px;
-				background-color: #999;
+				background-color: #333;
 				margin-bottom: 6px;
 			}
 			.logo-container {
@@ -55,7 +55,10 @@ const Header = (props) => {
 			.profile {
 				margin-right: 30px;
 			}
-		`}</style>
+			.img-color {
+				filter: invert(17%) sepia(3%) saturate(13%) hue-rotate(352deg) brightness(90%) contrast(86%);
+			}
+			`}</style>
 		</>
 	);
 };

@@ -6,8 +6,9 @@
 
 body{
     font-family: 'Varela Round', sans-serif;
-    color: white;
-    background-color: #10121B;
+    /* color: white; */
+    /* background-color: #10121B; */
+	background-color: #fff;
     font-size: 1.2rem;
 }
 
@@ -40,7 +41,8 @@ h2:hover{
 }
 
 p{
-    color: rgba(255, 255, 255, 0.596);
+    /* color: rgba(255, 255, 255, 0.596); */
+	color: #777
 }
 
 .item{
@@ -57,8 +59,8 @@ p{
 .item-con{
     width: 100%;
     padding: 1.2rem 1.2rem;
-    background-color: #19202E;
-    
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .activity-img{
