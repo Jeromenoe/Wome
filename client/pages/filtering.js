@@ -33,8 +33,8 @@ function App() {
 
 				<div className="title">
 					<h1>
-						Portfolio
-						<span> Filter</span>
+						Activités
+						<span> Nature</span>
 					</h1>
 				</div>
 
