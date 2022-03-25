@@ -67,26 +67,28 @@ function App({ activities, error }) {
 
 	return (
 		<>
-			<Header />
-			<div className="App">
+			<Header fixed={true}/>
+			<div className='main' >
+				<div className="App">
 
-				<div className="title">
-					<h1>
-						Activités
-						<span style={{color: '#037FFF'}}> Nature</span>
-					</h1>
+					<div className="title">
+						<h1>
+							Activités
+							<span style={{color: '#037FFF'}}> Nature</span>
+						</h1>
+					</div>
+
+					<FilterActivities
+						filterTypeItem={filterTypeItem}
+						filterCityItem={filterCityItem}
+						filterPriceItem={filterPriceItem}
+						minPrice={minPrice}
+						maxPrice={maxPrice}
+						activityTypes={activityTypes}
+					/>
+					<Activities activityItems={activityItems} />
+
 				</div>
-
-				<FilterActivities
-					filterTypeItem={filterTypeItem}
-					filterCityItem={filterCityItem}
-					filterPriceItem={filterPriceItem}
-					minPrice={minPrice}
-					maxPrice={maxPrice}
-					activityTypes={activityTypes}
-				/>
-				<Activities activityItems={activityItems} />
-
 			</div>
 		</>
 	);

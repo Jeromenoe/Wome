@@ -41,7 +41,7 @@ export default function SignUp() {
 
 	return (
 		<>
-			<Header />
+			<Header fixed={false}/>
 			<ThemeProvider theme={theme}>
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />

@@ -12,6 +12,11 @@ body{
     font-size: 1.2rem;
 }
 
+.main {
+	margin-top: 70px;
+	z-index: 100;
+}
+
 .App{
     /* padding: 0 20rem; */
 	width: 80%;

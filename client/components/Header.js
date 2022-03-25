@@ -5,7 +5,7 @@ import Image from "next/image";
 import ProfileBtn from "./ProfileBtn";
 import { useRouter } from "next/router";
 
-const Header = (props) => {
+const Header = ({ fixed }) => {
 	const router = useRouter()
 	const goToHome = (e) => {
 		e.preventDefault()
@@ -13,18 +13,28 @@ const Header = (props) => {
 	}
 	return (
 		<>
-			<div className="header-container">
-				<div className="logo-container img-color" onClick={goToHome} style={{cursor: 'pointer'}}>
-					<Image  src='/img/logo_wome.png' alt="" width={130} height={45} />
-				</div>
-				<div className="profile-container">
-					<div className="profile" >
-						<ProfileBtn />
+			<div className="header">
+				<div className="header-container">
+					<div className="logo-container img-color" onClick={goToHome} style={{cursor: 'pointer'}}>
+						<Image  src='/img/logo_wome.png' alt="" width={130} height={45} />
+					</div>
+					<div className="profile-container">
+						<div className="profile" >
+							<ProfileBtn />
+						</div>
 					</div>
 				</div>
+				<div className="bar"></div>
 			</div>
-			<div className="bar"></div>
+			
 			<style jsx>{`
+			.header {
+				top:0;
+				width: 100%;
+				position: ${fixed ? 'fixed' : 'static'}; 
+				z-index: 100;
+				background-color: #fff;
+			}
 			.header-container {
 				display: grid;
 				grid-template-columns: repeat(3, 1fr);
