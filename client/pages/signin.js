@@ -59,7 +59,7 @@ const SignIn = (props) => {
 							<LockOutlinedIcon />
 						</Avatar>
 						<Typography component="h1" variant="h5">
-							Sign in
+							Connexion
 						</Typography>
 						<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 							<TextField
@@ -67,7 +67,7 @@ const SignIn = (props) => {
 								required
 								fullWidth
 								id="email"
-								label="Email Address"
+								label="Adresse mail"
 								name="email"
 								autoComplete="email"
 							/>
@@ -76,7 +76,7 @@ const SignIn = (props) => {
 								required
 								fullWidth
 								name="password"
-								label="Password"
+								label="Mot de passe"
 								type="password"
 								id="password"
 								autoComplete="current-password"
@@ -87,12 +87,12 @@ const SignIn = (props) => {
 								variant="contained"
 								sx={{ mt: 3, mb: 2 }}
 							>
-								Sign In
+								Se connecter
 							</Button>
 							<Grid container justifyContent="flex-end">
 								<Grid item>
 									<Link href="signup" variant="body2" onClick={goToSignUp}>
-										{"Don't have an account? Sign Up"}
+										Vous n'avez pas de compte? S'inscrire
 									</Link>
 								</Grid>
 							</Grid>
