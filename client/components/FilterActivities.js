@@ -1,9 +1,10 @@
 import React from "react";
 import CustomSelect from "./CustomSelect";
 import SearchIcon from '@mui/icons-material/Search';
+import CustomSlider from "./CustomSlider";
 
 
-const FilterActivities = ({ filterTypeItem, filterCityItem, activityTypes }) => {
+const FilterActivities = ({ filterTypeItem, filterCityItem, filterPriceItem, activityTypes, minPrice, maxPrice }) => {
 	const handleCityFilter = (event) => {
 		filterCityItem(event.target.value);
 	}
@@ -18,6 +19,14 @@ const FilterActivities = ({ filterTypeItem, filterCityItem, activityTypes }) => 
 					<CustomSelect 
 						items={activityTypes}
 						filterTypeItem={filterTypeItem}
+					/>
+				</div>
+				<div style={{marginLeft: '35px'}}>
+					<span style={{color: '#666'}}>Tarif</span>
+					<CustomSlider 
+						filterPriceItem={filterPriceItem}
+						minPrice={minPrice}
+						maxPrice={maxPrice}
 					/>
 				</div>
 			</div>

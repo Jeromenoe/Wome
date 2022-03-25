@@ -13,10 +13,18 @@ function App({ activities, error }) {
 		return <div>An error occured: {error.message}</div>;
 	}
 	const activityTypes = [];
+	const [minPrice, setMinPrice] = useState(0);
+	const [maxPrice, setMaxPrice] = useState(0);
 	activities = activities.map(activity => {
 		activity.img = Imgs[activity.type];
 		if (!activityTypes.includes(activity.type)) {
 			activityTypes.push(activity.type);
+		}
+		if (activity.price < minPrice) {
+			setMinPrice(activity.price);
+		}
+		if (activity.price > maxPrice) {
+			setMaxPrice(activity.price);
 		}
 		return activity;
 	})
@@ -24,16 +32,18 @@ function App({ activities, error }) {
 	const [activityItems, setActivityItems] = useState(activities);
 	const [filterType, setFilterType] = useState('all');
 	const [filterCity, setFilterCity] = useState('');
-	// const [filterType, setFilterType] = useState('all');
+	const [filterPrice, setFilterPrice] = useState([minPrice, maxPrice]);
 
 	const filterTypeItem = (type) => {
 		setFilterType(type);
 	};
 
-
-
 	const filterCityItem = (text) => {
 		setFilterCity(text);
+	}
+
+	const filterPriceItem = (prices) => {
+		setFilterPrice(prices);
 	}
 
 	useEffect(() => {
@@ -46,9 +56,14 @@ function App({ activities, error }) {
 		}
 		newActivityItems = newActivityItems.filter((activity) => {
 			return activity.city.toUpperCase().indexOf(filterCity.toUpperCase()) > -1;
-		})
+		});
+		if (filterPrice[0] !== filterPrice[1]) {
+			newActivityItems = newActivityItems.filter((activity) => {
+				return activity.price >= filterPrice[0] && activity.price <= filterPrice[1];
+			});
+		}
 		setActivityItems(newActivityItems);
-	}, [filterType, filterCity]);
+	}, [filterType, filterCity, filterPrice]);
 
 	return (
 		<>
@@ -58,13 +73,16 @@ function App({ activities, error }) {
 				<div className="title">
 					<h1>
 						Activités
-						<span> Nature</span>
+						<span style={{color: '#037FFF'}}> Nature</span>
 					</h1>
 				</div>
 
 				<FilterActivities
 					filterTypeItem={filterTypeItem}
 					filterCityItem={filterCityItem}
+					filterPriceItem={filterPriceItem}
+					minPrice={minPrice}
+					maxPrice={maxPrice}
 					activityTypes={activityTypes}
 				/>
 				<Activities activityItems={activityItems} />
