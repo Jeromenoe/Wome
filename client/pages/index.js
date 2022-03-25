@@ -1,18 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Imgs from '../data/imgs';
 import Activities from '../components/Activities';
-import Button from '../components/Button';
 import Header from '../components/Header';
 import axios from 'axios';
 import FilterActivities from '../components/FilterActivities';
 
 
 
-// const allCategories = ['All', ...new Set(items.map(item => item.category))];
 
-// console.log(allCategories);
-
-function App({ activities, error}) {
+function App({ activities, error }) {
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
 	}
@@ -24,20 +20,35 @@ function App({ activities, error}) {
 		}
 		return activity;
 	})
-	
+
 	const [activityItems, setActivityItems] = useState(activities);
+	const [filterType, setFilterType] = useState('all');
+	const [filterCity, setFilterCity] = useState('');
+	// const [filterType, setFilterType] = useState('all');
 
 	const filterTypeItem = (type) => {
-		if (type === 'all') {
-			setActivityItems(activities)
-			return ;
-		}
-		const newActivityItems = activities.filter((activity) => {
-			return activity.type === type;
-		});
-		setActivityItems(newActivityItems);
-	  };
+		setFilterType(type);
+	};
 
+
+
+	const filterCityItem = (text) => {
+		setFilterCity(text);
+	}
+
+	useEffect(() => {
+		setActivityItems(activities);
+		let newActivityItems = activities;
+		if (filterType !== 'all') {
+			newActivityItems = newActivityItems.filter((activity) => {
+				return activity.type === filterType;
+			});
+		}
+		newActivityItems = newActivityItems.filter((activity) => {
+			return activity.city.toUpperCase().indexOf(filterCity.toUpperCase()) > -1;
+		})
+		setActivityItems(newActivityItems);
+	}, [filterType, filterCity]);
 
 	return (
 		<>
@@ -50,9 +61,10 @@ function App({ activities, error}) {
 						<span> Nature</span>
 					</h1>
 				</div>
-				
-				<FilterActivities 
+
+				<FilterActivities
 					filterTypeItem={filterTypeItem}
+					filterCityItem={filterCityItem}
 					activityTypes={activityTypes}
 				/>
 				<Activities activityItems={activityItems} />

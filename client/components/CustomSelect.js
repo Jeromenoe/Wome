@@ -27,7 +27,7 @@ const CustomSelect = ({ filterTypeItem, items }) => {
 					<MenuItem value="all">Tout</MenuItem>
 					{items.map(item => {
 						return (
-							<MenuItem value={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</MenuItem>
+							<MenuItem value={item} key={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</MenuItem>
 						)
 					})}
 				</Select>
