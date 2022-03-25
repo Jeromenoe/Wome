@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import Imgs from '../data/imgs';
-import Menu from '../components/Menu';
+import Activities from '../components/Activities';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import axios from 'axios';
+import FilterActivities from '../components/FilterActivities';
 
 
 
@@ -15,25 +16,27 @@ function App({ activities, error}) {
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
 	}
+	const activityTypes = [];
 	activities = activities.map(activity => {
 		activity.img = Imgs[activity.type];
+		if (!activityTypes.includes(activity.type)) {
+			activityTypes.push(activity.type);
+		}
 		return activity;
 	})
 	
-	const [menuItem, setMenuItem] = useState(activities);
-	// const [buttons, setButtons] = useState(allCategories);
+	const [activityItems, setActivityItems] = useState(activities);
 
-	//Filter Function
-	// const filter = (button) => {
-
-	// 	if (button === 'All') {
-	// 		setMenuItem(activities);
-	// 		return;
-	// 	}
-
-	// 	const filteredData = activities.filter(item => item.category === button);
-	// 	setMenuItem(filteredData)
-	// }
+	const filterTypeItem = (type) => {
+		if (type === 'all') {
+			setActivityItems(activities)
+			return ;
+		}
+		const newActivityItems = activities.filter((activity) => {
+			return activity.type === type;
+		});
+		setActivityItems(newActivityItems);
+	  };
 
 
 	return (
@@ -47,10 +50,12 @@ function App({ activities, error}) {
 						<span> Nature</span>
 					</h1>
 				</div>
-
-
-				{/* <Button button={buttons} filter={filter} /> */}
-				<Menu menuItem={menuItem} />
+				
+				<FilterActivities 
+					filterTypeItem={filterTypeItem}
+					activityTypes={activityTypes}
+				/>
+				<Activities activityItems={activityItems} />
 
 			</div>
 		</>

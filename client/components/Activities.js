@@ -1,22 +1,22 @@
 import React from 'react'
 import Image from 'next/image'
 
-function Menu({menuItem}) {
+function Activities({activityItems}) {
     return (
 		<>
 			<div className="item">
 				{
-					menuItem.map((item) =>{
-						return <div className="item-con" key={item._id} >
+					activityItems.map((activity) =>{
+						return <div className="item-con" key={activity._id} >
 							<div className="item-container" >
 								<div style={{ position: 'relative', width: '100%', height: '200px' }}>
-									<Image className='activity-img' src={item.img} alt="" layout="fill"/>
+									<Image className='activity-img' src={activity.img} alt="" layout="fill"/>
 								</div>
 								<div className='first-line'>
-									<p className='city'>{item.city}</p>
-									<p className='price'>{item.price}€</p>
+									<p className='city'>{activity.city}</p>
+									<p className='price'>{activity.price}€</p>
 								</div>
-								<p className='description'>{item.description}</p>
+								<p className='description'>{activity.description}</p>
 							</div>
 						</div>
 					})
@@ -44,4 +44,4 @@ function Menu({menuItem}) {
     )
 }
 
-export default Menu;
+export default Activities;
