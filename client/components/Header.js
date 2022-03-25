@@ -14,11 +14,8 @@ const Header = (props) => {
 	return (
 		<>
 			<div className="header-container">
-				<div className="logo-container">
-					<div className="img-color" onClick={goToHome} style={{cursor: 'pointer'}}>
-						<Image  src='/img/logo_wome.png' alt="" width={130} height={45} />
-					</div>
-
+				<div className="logo-container img-color" onClick={goToHome} style={{cursor: 'pointer'}}>
+					<Image  src='/img/logo_wome.png' alt="" width={130} height={45} />
 				</div>
 				<div className="profile-container">
 					<div className="profile" >
