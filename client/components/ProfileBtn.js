@@ -1,15 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ProfileDetails from "./ProfileDetails";
 
 const ProfileBtn = () => {
-	const [menuVisible, setMenuVisible] = useState(false);
-	const showMenu = () => {
-		setMenuVisible(!menuVisible);
+	const [isComponentVisible, setIsComponentVisible] = useState(false);
+	const ref = useRef(null);
+	const refBtn = useRef(null);
+
+	const handleClickOutside = (event) => {
+		if (ref.current && !ref.current.contains(event.target)) {
+			if (refBtn.current && !refBtn.current.contains(event.target)) {
+				setIsComponentVisible(false);
+			}
+		}
+	};
+
+	const escFunction = (event) => {
+		if (event.key === "Escape") {
+			setIsComponentVisible(false);
+		}
+	}
+
+	useEffect(() => {
+		document.addEventListener('click', handleClickOutside, true);
+		document.addEventListener("keydown", escFunction, false);
+		return () => {
+			document.removeEventListener('click', handleClickOutside, true);
+			document.removeEventListener("keydown", escFunction, false);
+		};
+	}, []);
+
+	const handleProfileClick = () => {
+		setIsComponentVisible(!isComponentVisible);
 	}
 	return (
 		<>
-			<div className='profile-icon' onClick={showMenu}>
+			<div className='profile-icon' onClick={handleProfileClick} ref={refBtn}>
 				<div className='bar-container'>
 					<div className='bar'></div>
 					<div className='bar'></div>
@@ -17,9 +43,9 @@ const ProfileBtn = () => {
 				</div>
 				<AccountCircleIcon style={{ color: '#333', fontSize: '34px' }} />
 			</div>
-			{menuVisible &&
-				<ProfileDetails />
-			}
+			<div ref={ref}>
+				{isComponentVisible && <ProfileDetails />}
+			</div>
 			<style jsx>{`
 				.profile-icon {
 					display: flex;

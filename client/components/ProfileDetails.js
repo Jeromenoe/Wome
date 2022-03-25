@@ -3,26 +3,27 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const ProfileDetails = () => {
-	const router = useRouter()
+	const router = useRouter();
 	const goToSignUp = (e) => {
 		e.preventDefault()
-		router.push('signup')
+		router.push('/signup')
 	}
 	const goToSignIn = (e) => {
 		e.preventDefault()
-		router.push('signin')
+		router.push('/signin')
 	}
+	
 	return (
 		<>
 			<div style={{ position: 'relative'}}>
 				<ul className="menu">
 					<li className="menu-item" onClick={goToSignUp}>
-						<Link href="signup">
+						<Link href="/signup">
 							<a style={{fontWeight: 'bold'}}>Inscription</a>
 						</Link>
 					</li>
 					<li className="menu-item" onClick={goToSignIn}>
-						<Link href="signin">
+						<Link href="/signin">
 							<a>Connexion</a>
 						</Link>
 					</li>
