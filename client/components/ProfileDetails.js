@@ -44,6 +44,12 @@ const ProfileDetails = ({ token }) => {
 							<a>Connexion</a>
 						</Link>
 					</li>
+					<li className="bar"></li>
+					<li className="menu-item" onClick={goToHome}>
+						<Link href="/">
+							<a>Activités</a>
+						</Link>
+					</li>
 					</>}
 					{token && <>
 					<li className="menu-item" onClick={logout}>
