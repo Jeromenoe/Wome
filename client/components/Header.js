@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Link from 'next/link'
 import Image from "next/image";
 import ProfileBtn from "./ProfileBtn";
 import { useRouter } from "next/router";
+import { checkCookies, getCookie } from 'cookies-next'
 
 const Header = ({ fixed }) => {
 	const router = useRouter()
+	let token = false;
 	const goToHome = (e) => {
 		e.preventDefault()
 		router.push('/')
+	}
+	if (checkCookies('jwt')) {
+		token = true;
 	}
 	return (
 		<>
@@ -20,7 +25,7 @@ const Header = ({ fixed }) => {
 					</div>
 					<div className="profile-container">
 						<div className="profile" >
-							<ProfileBtn />
+							<ProfileBtn token={token}/>
 						</div>
 					</div>
 				</div>

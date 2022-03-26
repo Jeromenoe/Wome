@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { setToken } from '../redux/actions/tokenActions';
 import Header from '../components/Header';
-
+import { setCookies, removeCookies } from 'cookies-next';
 
 const theme = createTheme();
 
@@ -31,6 +31,7 @@ const SignIn = (props) => {
 			});
 			const token = res.data;
 			props.setToken({token: token});
+			setCookies('jwt', token);
 			router.push('/')
 		} catch (error) {
 			return <div>An error occured (token)</div>;
@@ -40,7 +41,7 @@ const SignIn = (props) => {
 		e.preventDefault()
 		router.push('signup')
 	}
-
+	removeCookies('jwt');
 	return (
 		<>
 			<Header fixed={false}/>

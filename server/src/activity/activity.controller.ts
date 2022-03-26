@@ -7,16 +7,21 @@ import {
 	Body, 
 	ValidationPipe,
 	Delete,
+	UseGuards,
+	Req
 } from '@nestjs/common';
 import { ActivityDto } from './dto/create-activity.dto';
 import { Activity } from 'src/schemas/activity.schema';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('activities')
 export class ActivityController {
 	constructor(private readonly activityService: ActivityService) { }
 
+	@UseGuards(JwtAuthGuard)
 	@Get(':id')
-	async findOne(@Param('id') id: string) {
+	async findOne(@Param('id') id: string, @Req() req) {
+		console.log(req.user);
 		return await this.activityService.findOne(id);
 	}
 

@@ -4,14 +4,17 @@ import Activities from '../components/Activities';
 import Header from '../components/Header';
 import axios from 'axios';
 import FilterActivities from '../components/FilterActivities';
+import { connect } from 'react-redux';
+import { getCookie, removeCookies } from 'cookies-next';
 
 
 
 
-function App({ activities, error }) {
+function App({ activities, error, token }) {
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
 	}
+	
 	const activityTypes = [];
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(0);
@@ -67,14 +70,14 @@ function App({ activities, error }) {
 
 	return (
 		<>
-			<Header fixed={true}/>
+			<Header fixed={true} />
 			<div className='main' >
 				<div className="App">
 
 					<div className="title">
 						<h1>
 							Activités
-							<span style={{color: '#037FFF'}}> Nature</span>
+							<span style={{ color: '#037FFF' }}> Nature</span>
 						</h1>
 					</div>
 
@@ -94,6 +97,13 @@ function App({ activities, error }) {
 	);
 }
 
+
+const mapStateToProps = (state) => {
+	return { 
+		token: state.token
+	};
+};
+
 App.getInitialProps = async ctx => {
 	try {
 		const res = await axios.get('http://localhost:3001/activities');
@@ -104,4 +114,4 @@ App.getInitialProps = async ctx => {
 	}
 };
 
-export default App;
+export default connect(mapStateToProps)(App);

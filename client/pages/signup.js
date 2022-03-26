@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import Header from '../components/Header';
+import { setCookies, removeCookies } from 'cookies-next'
 
 
 
@@ -28,7 +29,8 @@ export default function SignUp() {
 				email: data.get('email'),
 				password: data.get('password')
 			});
-			router.push('signin')
+			setCookies('jwt', token);
+			router.push('/')
 		} catch (error) {
 			return <div>An error occured (token)</div>;
 		}
@@ -38,7 +40,7 @@ export default function SignUp() {
 		e.preventDefault()
 		router.push('signin')
 	}
-
+	removeCookies('jwt');
 	return (
 		<>
 			<Header fixed={false}/>

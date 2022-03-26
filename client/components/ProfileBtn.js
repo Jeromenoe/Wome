@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ProfileDetails from "./ProfileDetails";
 
-const ProfileBtn = () => {
+const ProfileBtn = ({ token }) => {
 	const [isComponentVisible, setIsComponentVisible] = useState(false);
 	const ref = useRef(null);
 	const refBtn = useRef(null);
@@ -44,7 +44,7 @@ const ProfileBtn = () => {
 				<AccountCircleIcon style={{ color: '#333', fontSize: '34px' }} />
 			</div>
 			<div ref={ref}>
-				{isComponentVisible && <ProfileDetails />}
+				{isComponentVisible && <ProfileDetails token={token}/>}
 			</div>
 			<style jsx>{`
 				.profile-icon {

@@ -2,8 +2,10 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const ProfileDetails = () => {
+const ProfileDetails = ({ token }) => {
 	const router = useRouter();
+	console.log(token);
+	
 	const goToSignUp = (e) => {
 		e.preventDefault()
 		router.push('/signup')
@@ -12,11 +14,22 @@ const ProfileDetails = () => {
 		e.preventDefault()
 		router.push('/signin')
 	}
+
+	const goToHome = (e) => {
+		e.preventDefault();
+		router.push('/');
+	}
+	
+	const goToServices = (e) => {
+		e.preventDefault();
+		router.push('/services');
+	}
 	
 	return (
 		<>
 			<div style={{ position: 'relative'}}>
 				<ul className="menu">
+					{!token && <>
 					<li className="menu-item" onClick={goToSignUp}>
 						<Link href="/signup">
 							<a style={{fontWeight: 'bold'}}>Inscription</a>
@@ -27,6 +40,25 @@ const ProfileDetails = () => {
 							<a>Connexion</a>
 						</Link>
 					</li>
+					</>}
+					{token && <>
+					<li className="menu-item" onClick={goToSignIn}>
+						<Link href="/signin">
+							<a style={{fontWeight: 'bold'}}>Déconnexion</a>
+						</Link>
+					</li>
+					<li className="bar"></li>
+					<li className="menu-item" onClick={goToHome}>
+						<Link href="/">
+							<a>Voyages</a>
+						</Link>
+					</li>
+					<li className="menu-item" onClick={goToServices}>
+						<Link href="/services">
+							<a>Prestations</a>
+						</Link>
+					</li>
+					</>}
 				</ul>
 			</div>
 			<style jsx>{`
@@ -57,6 +89,10 @@ const ProfileDetails = () => {
 
 				a:visited {
 					text-decoration: none;
+				}
+				.bar {
+					height: 1px;
+					background-color: #ddd
 				}
 			`}</style>
 		</>
