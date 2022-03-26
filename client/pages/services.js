@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import axios from "axios";
 import Activities from "../components/Activities";
 import Imgs from "../data/imgs";
-import { getCookie, checkCookies } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 
 const cookieToJson = (cookie) => {
 	var output = {};

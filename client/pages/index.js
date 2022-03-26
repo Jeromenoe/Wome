@@ -4,10 +4,6 @@ import Activities from '../components/Activities';
 import Header from '../components/Header';
 import axios from 'axios';
 import FilterActivities from '../components/FilterActivities';
-import { connect } from 'react-redux';
-
-
-
 
 function App({ activities, error }) {
 	if (error) {

@@ -40,7 +40,6 @@ export default function SignUp() {
 		e.preventDefault()
 		router.push('signin')
 	}
-	removeCookies('jwt');
 	return (
 		<>
 			<Header fixed={false}/>
@@ -127,3 +126,9 @@ export default function SignUp() {
 		</>
 	);
 }
+
+SignUp.getInitialProps = async ({ req, res }) => {
+	if (req) {
+		res.setHeader('Set-Cookie', 'jwt=deleted;');
+	}
+}; 

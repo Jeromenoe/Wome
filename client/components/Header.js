@@ -14,7 +14,9 @@ const Header = ({ fixed }) => {
 		router.push('/')
 	}
 	if (checkCookies('jwt')) {
-		token = true;
+		if (getCookie('jwt') != 'deleted') {
+			token = true;
+		}
 	}
 	return (
 		<>

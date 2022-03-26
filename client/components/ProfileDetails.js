@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { removeCookies } from 'cookies-next';
 
 const ProfileDetails = ({ token }) => {
 	const router = useRouter();
@@ -23,6 +24,10 @@ const ProfileDetails = ({ token }) => {
 		e.preventDefault();
 		router.push('/services');
 	}
+	const logout = (e) => {
+		e.preventDefault()
+		router.push('/signin')
+	}
 
 	return (
 		<>
@@ -41,7 +46,7 @@ const ProfileDetails = ({ token }) => {
 					</li>
 					</>}
 					{token && <>
-					<li className="menu-item" onClick={goToSignIn}>
+					<li className="menu-item" onClick={logout}>
 						<Link href="/signin">
 							<a style={{fontWeight: 'bold'}}>Déconnexion</a>
 						</Link>

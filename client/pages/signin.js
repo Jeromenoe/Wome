@@ -30,6 +30,7 @@ const SignIn = () => {
 			const token = res.data;
 			setCookies('jwt', token.accessToken);
 			router.push('/')
+			return ;
 		} catch (error) {
 			return <div>An error occured (token)</div>;
 		}
@@ -38,7 +39,10 @@ const SignIn = () => {
 		e.preventDefault()
 		router.push('signup')
 	}
-	removeCookies('jwt');
+	
+	React.useEffect(() => {
+		removeCookies('jwt');
+	}, [])
 	return (
 		<>
 			<Header fixed={false}/>
@@ -101,6 +105,12 @@ const SignIn = () => {
 		</>
 	);
 }
+
+SignIn.getInitialProps = async ({ req, res }) => {
+	if (req) {
+		res.setHeader('Set-Cookie', 'jwt=deleted;');
+	} 
+};
 
 
 export default SignIn;
