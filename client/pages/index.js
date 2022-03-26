@@ -5,12 +5,11 @@ import Header from '../components/Header';
 import axios from 'axios';
 import FilterActivities from '../components/FilterActivities';
 import { connect } from 'react-redux';
-import { getCookie, removeCookies } from 'cookies-next';
 
 
 
 
-function App({ activities, error, token }) {
+function App({ activities, error }) {
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
 	}

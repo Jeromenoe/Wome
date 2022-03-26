@@ -29,7 +29,7 @@ export default function SignUp() {
 				email: data.get('email'),
 				password: data.get('password')
 			});
-			setCookies('jwt', token);
+			setCookies('jwt', token.accessToken);
 			router.push('/')
 		} catch (error) {
 			return <div>An error occured (token)</div>;

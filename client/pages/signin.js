@@ -31,7 +31,7 @@ const SignIn = (props) => {
 			});
 			const token = res.data;
 			props.setToken({token: token});
-			setCookies('jwt', token);
+			setCookies('jwt', token.accessToken);
 			router.push('/')
 		} catch (error) {
 			return <div>An error occured (token)</div>;

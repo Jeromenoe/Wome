@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 const ProfileDetails = ({ token }) => {
 	const router = useRouter();
-	console.log(token);
 	
 	const goToSignUp = (e) => {
 		e.preventDefault()
