@@ -11,15 +11,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRouter } from 'next/router'
-import { connect } from 'react-redux';
 import axios from 'axios';
-import { setToken } from '../redux/actions/tokenActions';
 import Header from '../components/Header';
 import { setCookies, removeCookies } from 'cookies-next';
 
 const theme = createTheme();
 
-const SignIn = (props) => {
+const SignIn = () => {
 	const router = useRouter()
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -30,7 +28,6 @@ const SignIn = (props) => {
 				password: data.get('password')
 			});
 			const token = res.data;
-			props.setToken({token: token});
 			setCookies('jwt', token.accessToken);
 			router.push('/')
 		} catch (error) {
@@ -105,8 +102,5 @@ const SignIn = (props) => {
 	);
 }
 
-const mapDispatchToProps = {
-	setToken: setToken
-};
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default SignIn;

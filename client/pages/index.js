@@ -97,11 +97,6 @@ function App({ activities, error }) {
 }
 
 
-const mapStateToProps = (state) => {
-	return { 
-		token: state.token
-	};
-};
 
 App.getInitialProps = async ctx => {
 	try {
@@ -113,4 +108,4 @@ App.getInitialProps = async ctx => {
 	}
 };
 
-export default connect(mapStateToProps)(App);
+export default App;

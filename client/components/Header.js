@@ -50,7 +50,6 @@ const Header = ({ fixed }) => {
 				width: 100%;
 				height: 1px;
 				background-color: #333;
-				margin-bottom: 6px;
 			}
 			.logo-container {
 				grid-column: 2;
