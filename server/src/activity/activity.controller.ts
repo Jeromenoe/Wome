@@ -18,10 +18,8 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class ActivityController {
 	constructor(private readonly activityService: ActivityService) { }
 
-	@UseGuards(JwtAuthGuard)
-	@Get(':id')
-	async findOne(@Param('id') id: string, @Req() req) {
-		console.log(req.user);
+	@Get('getOne/:id')
+	async findOne(@Param('id') id: string) {
 		return await this.activityService.findOne(id);
 	}
 
@@ -30,17 +28,25 @@ export class ActivityController {
 		return await this.activityService.findAll();
 	}
 
-	@Post()
-	async create(
-		@Body(ValidationPipe) activityDto: ActivityDto
-	): Promise<Activity> {
-		return await this.activityService.create(activityDto);
+	@UseGuards(JwtAuthGuard)
+	@Get('getByUser')
+	async findByUser(@Req() req) {
+		return await this.activityService.findByUser(req.user.userId);
 	}
 
+	@UseGuards(JwtAuthGuard)
+	@Post()
+	async create(
+		@Body(ValidationPipe) activityDto: ActivityDto, @Req() req
+	): Promise<Activity> {
+		return await this.activityService.create(activityDto, req.user.userId);
+	}
+
+	@UseGuards(JwtAuthGuard)
 	@Delete(':id')
 	async delete(
-		@Param('id') id: string
+		@Param('id') id: string, @Req() req
 	): Promise<Activity> {
-		return await this.activityService.delete(id);
+		return await this.activityService.delete(id, req.user.userId);
 	}
 }

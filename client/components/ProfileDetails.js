@@ -24,7 +24,7 @@ const ProfileDetails = ({ token }) => {
 		e.preventDefault();
 		router.push('/services');
 	}
-	
+
 	return (
 		<>
 			<div style={{ position: 'relative'}}>
@@ -50,7 +50,7 @@ const ProfileDetails = ({ token }) => {
 					<li className="bar"></li>
 					<li className="menu-item" onClick={goToHome}>
 						<Link href="/">
-							<a>Voyages</a>
+							<a>Activités</a>
 						</Link>
 					</li>
 					<li className="menu-item" onClick={goToServices}>
