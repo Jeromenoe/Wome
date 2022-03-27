@@ -15,7 +15,7 @@ const CustomSelect = ({ filterTypeItem, items }) => {
 
 	return (
 		<Box sx={{ minWidth: 120 }}>
-			<FormControl fullWidth>
+			<FormControl fullWidth size="small">
 				<InputLabel id="demo-simple-select-label">Type</InputLabel>
 				<Select
 					labelId="demo-simple-select-label"

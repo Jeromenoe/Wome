@@ -44,6 +44,7 @@ const FilterActivities = ({ filterTypeItem, filterCityItem, filterPriceItem, act
 					font-size: 16px;
 					padding: 12px 20px 12px 32px;
 					border: 1px solid #ddd;
+					height: 38px;
 				}
 			`}</style>
 		</>

@@ -9,11 +9,9 @@ const CardService = ({ onAdd }) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-
-		if (!text) {
-			alert('Please add a task')
+		console.log('btn');
+		
 			return
-		}
 
 		onAdd({ text, day, reminder })
 
@@ -29,40 +27,23 @@ const CardService = ({ onAdd }) => {
 	return (
 		<>
 
-			<form className='add-form' onSubmit={onSubmit}>
-				<div className='form-control'>
-					<label>Ville</label>
-					<input
-						type='text'
-						placeholder='Add Task'
-						value={text}
-						onChange={(e) => setText(e.target.value)}
-					/>
+			<form onSubmit={onSubmit}>
+				<div className='form-control first-line'>
+					<input type="text" id="city" placeholder="Ville de l'activité" title="Ville" style={{marginRight: '20px'}}></input>
+					<CustomSelect filterTypeItem={handleType} items={['yoga', 'velo']}/>
 				</div>
 				<div className='form-control'>
-					{/* <CustomSelect filterTypeItem={handleType} items={['yoga', 'velo']}/> */}
+					<textarea type="text" id="description" placeholder="Description de l'activité" title="Description"></textarea>
 				</div>
-				<input type='submit' value='Save Task' className='btn btn-block' />
+				<input type='submit' value='Ajouter' className='btn btn-block' />
 			</form>
 			<style jsx>{`
-				.add-form {
-					margin-bottom: 40px;
-				}
-
 				.form-control {
 					margin: 20px 0;
 				}
 
 				.form-control label {
 					display: block;
-				}
-
-				.form-control input {
-					width: 100%;
-					height: 40px;
-					margin: 5px;
-					padding: 3px 7px;
-					font-size: 17px;
 				}
 
 				.form-control-check {
@@ -78,6 +59,61 @@ const CardService = ({ onAdd }) => {
 				.form-control-check input {
 					flex: 2;
 					height: 20px;
+				}
+				#city {
+					background-position: 10px 12px;
+					background-repeat: no-repeat;
+					width: 100%;
+					font-size: 16px;
+					padding: 12px 20px 12px 5px;
+					border: 1px solid #ddd;
+					height: 38px;
+					margin: 0;
+				}
+
+				
+				#description {
+					background-position: 10px 12px;
+					background-repeat: no-repeat;
+					width: 100%;
+					font-size: 16px;
+					padding: 5px;
+					border: 1px solid #ddd;
+					height: 80px;
+					margin: 0;
+					resize: none;
+					font-family: 'Varela Round', sans-serif;
+				}
+
+				.first-line {
+					display: flex;
+					align-items: center;
+				}
+				.btn {
+					display: inline-block;
+					background: #000;
+					color: #fff;
+					border: none;
+					padding: 10px 20px;
+					margin-top: 25px;
+					border-radius: 5px;
+					cursor: pointer;
+					text-decoration: none;
+					font-size: 15px;
+					font-family: inherit;
+				}
+
+				.btn:focus {
+					outline: none;
+				}
+
+				.btn:active {
+					transform: scale(0.98);
+				}
+
+				.btn-block {
+					display: block;
+					width: 100%;
 				}
 			`}</style>
 		</>

@@ -30,7 +30,7 @@ const Services = ({ activities, error }) => {
 			<div className='main' >
 				<div className="services-container">
 					<div className="card-service-container">
-						<h1>Ma prestation</h1>
+						<h1>Prestation</h1>
 						<CardService />
 					</div>
 					<Activities activityItems={activities} />
@@ -52,6 +52,9 @@ const Services = ({ activities, error }) => {
 					border: 1px solid #555;
 					padding: 30px;
 					border-radius: 5px;
+				}
+				h1 {
+					font-size: 2rem;
 				}
 			`}</style>
 		</>
