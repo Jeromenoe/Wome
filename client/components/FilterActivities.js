@@ -12,7 +12,7 @@ const FilterActivities = ({ filterTypeItem, filterCityItem, filterPriceItem, act
 		<>
 			<div className="filters-container">
 				<div style={{width: '300px', position: 'relative'}}>
-					<SearchIcon style={{ position: 'absolute', top: '13px', left: '8px', color: '#555', fontSize: '1.1em'}}/>
+					<SearchIcon style={{ position: 'absolute', top: '10px', left: '8px', color: '#555', fontSize: '1.1em'}}/>
 					<input type="text" id="myInput" onKeyUp={handleCityFilter} placeholder="Recherche par ville" title="Type in a name"></input>
 				</div>
 				<div style={{width: '150px', marginLeft: '30px'}}>

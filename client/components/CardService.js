@@ -13,10 +13,10 @@ const CardService = ({ onAdd }) => {
 		e.preventDefault()
 		console.log(city, type, description);
 		onAdd({ city, type, description, price: parseInt(price) })
-		// setCity('')
-		// setType('')
-		// setDescription('')
-		// setPrice('')
+		setCity('')
+		setType('')
+		setDescription('')
+		setPrice('')
 	}
 
 	const handleType = (type) => {

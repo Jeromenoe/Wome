@@ -25,6 +25,7 @@ const Services = ({ activities, token, error }) => {
 		return activity;
 	});
 	const [services, setServices] = useState(activities);
+
 	const handleAddService = async (service) => {
 		await axios.post('http://localhost:3001/activities', {...service}, {
 			headers: {
@@ -43,6 +44,26 @@ const Services = ({ activities, token, error }) => {
 		});
 		setServices(newActivities);
 	}
+
+	const handleDeleteService = async (activtyId) => {
+		await axios.delete(`http://localhost:3001/activities/${activtyId}`, {
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+		})
+		const resActivities = await axios.get('http://localhost:3001/activities/getByUser', {
+				headers: {
+					'Authorization': `Bearer ${token}`
+				}
+		});
+		const newActivities = resActivities.data.map(activity => {
+			activity.img = Imgs[activity.type];
+			return activity;
+		});
+		setServices(newActivities);
+	}
+
 	return (
 		<>
 			<Header fixed={true} />
@@ -52,7 +73,7 @@ const Services = ({ activities, token, error }) => {
 						<h1>Prestation</h1>
 						<CardService onAdd={handleAddService}/>
 					</div>
-					<Activities activityItems={services} />
+					<Activities activityItems={services} isChangeable='true' handleDeleteService={handleDeleteService}/>
 				</div>
 			</div>
 			<style jsx>{`
