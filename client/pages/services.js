@@ -4,6 +4,7 @@ import axios from "axios";
 import Activities from "../components/Activities";
 import Imgs from "../data/imgs";
 import { getCookie } from 'cookies-next';
+import CardService from "../components/CardService";
 
 const cookieToJson = (cookie) => {
 	var output = {};
@@ -27,10 +28,32 @@ const Services = ({ activities, error }) => {
 		<>
 			<Header fixed={true} />
 			<div className='main' >
-				<div className="App">
+				<div className="services-container">
+					<div className="card-service-container">
+						<h1>Ma prestation</h1>
+						<CardService />
+					</div>
 					<Activities activityItems={activities} />
 				</div>
 			</div>
+			<style jsx>{`
+				.main {
+					margin-top: 110px;
+				}
+				.services-container {
+					width: 80%;
+					margin: auto;
+				}
+				.card-service-container {
+					max-width: 400px;
+					margin: 30px auto;
+					overflow: auto;
+					min-height: 300px;
+					border: 1px solid #555;
+					padding: 30px;
+					border-radius: 5px;
+				}
+			`}</style>
 		</>
 	);
 };
