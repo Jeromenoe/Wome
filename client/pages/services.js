@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import axios from "axios";
 import Activities from "../components/Activities";
@@ -16,7 +16,7 @@ const cookieToJson = (cookie) => {
 	return json;
 }
 
-const Services = ({ activities, error }) => {
+const Services = ({ activities, token, error }) => {
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
 	}
@@ -24,6 +24,25 @@ const Services = ({ activities, error }) => {
 		activity.img = Imgs[activity.type];
 		return activity;
 	});
+	const [services, setServices] = useState(activities);
+	const handleAddService = async (service) => {
+		await axios.post('http://localhost:3001/activities', {...service}, {
+			headers: {
+				'Content-type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+		})
+		const resActivities = await axios.get('http://localhost:3001/activities/getByUser', {
+				headers: {
+					'Authorization': `Bearer ${token}`
+				}
+		});
+		const newActivities = resActivities.data.map(activity => {
+			activity.img = Imgs[activity.type];
+			return activity;
+		});
+		setServices(newActivities);
+	}
 	return (
 		<>
 			<Header fixed={true} />
@@ -31,9 +50,9 @@ const Services = ({ activities, error }) => {
 				<div className="services-container">
 					<div className="card-service-container">
 						<h1>Prestation</h1>
-						<CardService />
+						<CardService onAdd={handleAddService}/>
 					</div>
-					<Activities activityItems={activities} />
+					<Activities activityItems={services} />
 				</div>
 			</div>
 			<style jsx>{`
@@ -76,7 +95,7 @@ Services.getInitialProps = async ({ req }) => {
 				}
 			});
 		const activities = res.data;
-		return { activities };
+		return { activities, token };
 	} catch (error) {
 		return { error };
 	}

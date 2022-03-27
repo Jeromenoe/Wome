@@ -3,25 +3,24 @@ import { useState } from 'react'
 import CustomSelect from './CustomSelect'
 
 const CardService = ({ onAdd }) => {
-	const [text, setText] = useState('')
-	const [day, setDay] = useState('')
-	const [reminder, setReminder] = useState(false)
+	const [city, setCity] = useState('');
+	const [type, setType] = useState('');
+	const [description, setDescription] = useState('');
+	const [price, setPrice] = useState('');
+
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-		console.log('btn');
-		
-			return
-
-		onAdd({ text, day, reminder })
-
-		setText('')
-		setDay('')
-		setReminder(false)
+		console.log(city, type, description);
+		onAdd({ city, type, description, price: parseInt(price) })
+		// setCity('')
+		// setType('')
+		// setDescription('')
+		// setPrice('')
 	}
 
 	const handleType = (type) => {
-		console.log(type);
+		setType(type);
 	}
 
 	return (
@@ -29,12 +28,16 @@ const CardService = ({ onAdd }) => {
 
 			<form onSubmit={onSubmit}>
 				<div className='form-control first-line'>
-					<input type="text" id="city" placeholder="Ville de l'activité" title="Ville" style={{marginRight: '20px'}}></input>
-					<CustomSelect filterTypeItem={handleType} items={['yoga', 'velo']}/>
+					<input type="text" id="city" placeholder="Ville de l'activité" title="Ville" value={city}
+					onChange={(e) => setCity(e.target.value)} style={{marginRight: '20px'}}></input>
+					<CustomSelect filterTypeItem={handleType} items={['yoga', 'velo']} value={type}/>
 				</div>
 				<div className='form-control'>
-					<textarea type="text" id="description" placeholder="Description de l'activité" title="Description"></textarea>
+					<textarea type="text" id="description" placeholder="Description de l'activité" title="Description"
+					onChange={(e) => setDescription(e.target.value)}
+					value={description}></textarea>
 				</div>
+				<input type="text" id="price" placeholder="Prix" title="Prix" value={price} onChange={(e) => setPrice(e.target.value)}></input>
 				<input type='submit' value='Ajouter' className='btn btn-block' />
 			</form>
 			<style jsx>{`
@@ -71,6 +74,16 @@ const CardService = ({ onAdd }) => {
 					margin: 0;
 				}
 
+				#price {
+					background-position: 10px 12px;
+					background-repeat: no-repeat;
+					width: 30%;
+					font-size: 16px;
+					padding: 12px 20px 12px 5px;
+					border: 1px solid #ddd;
+					height: 38px;
+					margin: 0;
+				}
 				
 				#description {
 					background-position: 10px 12px;

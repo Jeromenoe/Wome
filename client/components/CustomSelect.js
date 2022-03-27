@@ -5,13 +5,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const CustomSelect = ({ filterTypeItem, items }) => {
-	const [type, setType] = React.useState('');
+const CustomSelect = ({ filterTypeItem, items, value = '' }) => {
+	const [type, setType] = React.useState(value);
 
 	const handleChange = (event) => {
 		setType(event.target.value);
 		filterTypeItem(event.target.value);
 	};
+	React.useEffect(() => {
+		setType(value);
+	}, [value])
 
 	return (
 		<Box sx={{ minWidth: 120 }}>
