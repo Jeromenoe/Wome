@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import Link from 'next/link'
 import Image from "next/image";
 import ProfileBtn from "./ProfileBtn";
 import { useRouter } from "next/router";
 import { checkCookies, getCookie } from 'cookies-next'
 
-const Header = ({ fixed, scrollbar }) => {
+const Header = ({ fixed }) => {
 	const router = useRouter()
 	let token = false;
 	const goToHome = (e) => {
@@ -18,23 +16,23 @@ const Header = ({ fixed, scrollbar }) => {
 			token = true;
 		}
 	}
-	
+
 	return (
 		<>
 			<div className="header">
 				<div className="header-container">
-					<div className="logo-container img-color" onClick={goToHome} style={{cursor: 'pointer'}}>
-						<Image  src='/img/logo_wome.png' alt="" width={130} height={45} />
+					<div className="logo-container img-color" onClick={goToHome} style={{ cursor: 'pointer' }}>
+						<Image src='/img/logo_wome.png' alt="" width={130} height={45} />
 					</div>
 					<div className="profile-container">
 						<div className="profile" >
-							<ProfileBtn token={token}/>
+							<ProfileBtn token={token} />
 						</div>
 					</div>
 				</div>
 				<div className="bar"></div>
 			</div>
-			
+
 			<style jsx>{`
 			.header {
 				top:0;
@@ -48,7 +46,6 @@ const Header = ({ fixed, scrollbar }) => {
 				grid-template-columns: repeat(3, 1fr);
 				grid-gap: 10px;
 				grid-auto-rows: minmax(70px, auto);
-				padding-right: ${scrollbar ? '' : '15px'}; 
 			}
 			.bar {
 				width: 100%;

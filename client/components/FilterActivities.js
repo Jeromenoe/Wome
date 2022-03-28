@@ -19,7 +19,7 @@ const FilterActivities = ({ filterTypeItem, filterCityItem, filterPriceItem, act
 					<CustomSelect 
 						items={activityTypes}
 						filterTypeItem={filterTypeItem}
-						setScrollbar={setScrollbar}
+						search={ true }
 					/>
 				</div>
 				<div style={{marginLeft: '35px'}}>

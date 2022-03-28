@@ -5,8 +5,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const CustomSelect = ({ filterTypeItem, items, value = '', setScrollbar }) => {
+const CustomSelect = ({ filterTypeItem, items, value = '', search = false }) => {
 	const [type, setType] = React.useState(value);
+	const [scrollbar, setScrollbar] = React.useState(true);
 
 	const handleChange = (event) => {
 		setType(event.target.value);
@@ -17,12 +18,17 @@ const CustomSelect = ({ filterTypeItem, items, value = '', setScrollbar }) => {
 	}, [value])
 
 	const onSelectOpen = () => {
-		setScrollbar(false);
+		if (document.body.clientHeight > window.innerHeight) {
+			setScrollbar(false);
+		}
 	}
 	const onSelectClose = () => {
-		setScrollbar(true);
+		if (document.body.clientHeight > window.innerHeight) {
+			setScrollbar(true);
+		}
 	}
 	return (
+		<>
 		<Box sx={{ minWidth: 120 }}>
 			<FormControl fullWidth size="small">
 				<InputLabel id="demo-simple-select-label">Type</InputLabel>
@@ -35,6 +41,7 @@ const CustomSelect = ({ filterTypeItem, items, value = '', setScrollbar }) => {
 					label="Type"
 					onChange={handleChange}
 				>
+					{search && <MenuItem value='all'>Tout</MenuItem>}
 					{items.map(item => {
 						return (
 							<MenuItem value={item} key={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</MenuItem>
@@ -43,6 +50,12 @@ const CustomSelect = ({ filterTypeItem, items, value = '', setScrollbar }) => {
 				</Select>
 			</FormControl>
 		</Box>
+		<style jsx global>{`
+			.header-container {
+				padding-right: ${scrollbar ? '' : '15px'}
+			}
+		`}</style>
+		</>
 	);
 }
 

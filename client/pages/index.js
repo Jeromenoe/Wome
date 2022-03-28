@@ -6,7 +6,6 @@ import axios from 'axios';
 import FilterActivities from '../components/FilterActivities';
 
 function App({ activities, error }) {
-	const [scrollbar, setScrollbar] = useState(true);
 	const activityTypes = [];
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(0);
@@ -67,7 +66,7 @@ function App({ activities, error }) {
 
 	return (
 		<>
-			<Header fixed={true} scrollbar={scrollbar}/>
+			<Header fixed={true}/>
 			<div className='main' >
 				<div className="App">
 
@@ -85,7 +84,6 @@ function App({ activities, error }) {
 						minPrice={minPrice}
 						maxPrice={maxPrice}
 						activityTypes={activityTypes}
-						setScrollbar={setScrollbar}
 					/>
 					<Activities activityItems={activityItems} />
 

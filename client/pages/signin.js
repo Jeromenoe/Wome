@@ -45,7 +45,7 @@ const SignIn = () => {
 	}, [])
 	return (
 		<>
-			<Header fixed={false} scrollbar={false}/>
+			<Header fixed={false} />
 			<ThemeProvider theme={theme}>
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />

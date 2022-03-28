@@ -17,7 +17,6 @@ const cookieToJson = (cookie) => {
 }
 
 const Services = ({ activities, token, error }) => {
-	const [scrollbar, setScrollbar] = useState(true);
 	const [services, setServices] = useState(activities);
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
@@ -68,12 +67,12 @@ const Services = ({ activities, token, error }) => {
 
 	return (
 		<>
-			<Header fixed={true} scrollbar={scrollbar}/>
+			<Header fixed={true}/>
 			<div className='main' >
 				<div className="services-container">
 					<div className="card-service-container">
 						<h1>Prestation</h1>
-						<CardService onAdd={handleAddService} setScrollbar={setScrollbar}/>
+						<CardService onAdd={handleAddService} />
 					</div>
 					<Activities activityItems={services} isChangeable='true' handleDeleteService={handleDeleteService}/>
 				</div>
