@@ -14,10 +14,12 @@ import { useRouter } from 'next/router'
 import axios from 'axios';
 import Header from '../components/Header';
 import { setCookies, removeCookies } from 'cookies-next';
+import Notification from '../components/Notification';
 
 const theme = createTheme();
 
 const SignIn = () => {
+	const [notif, setNotif] = React.useState(false)
 	const router = useRouter()
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -27,12 +29,15 @@ const SignIn = () => {
 				email: data.get('email'),
 				password: data.get('password')
 			});
+			
 			const token = res.data;
 			setCookies('jwt', token.accessToken);
 			router.push('/')
 			return ;
 		} catch (error) {
-			return <div>An error occured (token)</div>;
+			setNotif(false);
+			setNotif(true);
+			return;
 		}
 	};
 	const goToSignUp = (e) => {
@@ -102,6 +107,7 @@ const SignIn = () => {
 					</Box>
 				</Container>
 			</ThemeProvider>
+			{notif && <Notification message={'Identifiants incorrects !'} severity={'error'} />}
 		</>
 	);
 }

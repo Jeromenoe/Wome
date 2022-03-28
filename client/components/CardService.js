@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import CustomSelect from './CustomSelect'
 import imgs from '../data/imgs'
 
-const CardService = ({ onAdd, setScrollbar }) => {
+const CardService = ({ onAdd }) => {
 	const [city, setCity] = useState('');
 	const [type, setType] = useState('');
 	const [description, setDescription] = useState('');
@@ -15,10 +15,10 @@ const CardService = ({ onAdd, setScrollbar }) => {
 		e.preventDefault()
 		console.log(city, type, description);
 		onAdd({ city, type, description, price: parseInt(price) })
-		setCity('')
-		setType('')
-		setDescription('')
-		setPrice('')
+		// setCity('')
+		// setType('')
+		// setDescription('')
+		// setPrice('')
 	}
 
 	const handleType = (type) => {
@@ -39,7 +39,7 @@ const CardService = ({ onAdd, setScrollbar }) => {
 				<div className='form-control first-line'>
 					<input type="text" id="city" placeholder="Ville de l'activité" title="Ville" value={city}
 					onChange={(e) => setCity(e.target.value)} style={{marginRight: '20px'}}></input>
-					<CustomSelect filterTypeItem={handleType} items={items} value={type} setScrollbar={setScrollbar}/>
+					<CustomSelect filterTypeItem={handleType} items={items} value={type}/>
 				</div>
 				<div className='form-control'>
 					<textarea type="text" id="description" placeholder="Description de l'activité" title="Description"

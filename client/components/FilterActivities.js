@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import CustomSlider from "./CustomSlider";
 
 
-const FilterActivities = ({ filterTypeItem, filterCityItem, filterPriceItem, activityTypes, minPrice, maxPrice, setScrollbar }) => {
+const FilterActivities = ({ filterTypeItem, filterCityItem, filterPriceItem, activityTypes, minPrice, maxPrice }) => {
 	const handleCityFilter = (event) => {
 		filterCityItem(event.target.value);
 	}

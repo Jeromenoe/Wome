@@ -13,13 +13,17 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useRouter } from 'next/router'
 import axios from 'axios';
 import Header from '../components/Header';
-import { setCookies, removeCookies } from 'cookies-next'
+import { setCookies } from 'cookies-next'
+import Notification from '../components/Notification';
 
 
 
 const theme = createTheme();
 
 const SignUp = () => {
+	const [notif, setNotif] = React.useState(false);
+	const [message, setMessage] = React.useState('');
+	const [severity, setSeverity] = React.useState('');
 	const router = useRouter()
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -29,10 +33,28 @@ const SignUp = () => {
 				email: data.get('email'),
 				password: data.get('password')
 			});
+			setMessage('Compte créé !');
+			setSeverity('success');
+			setNotif(false);
+			setNotif(true);
+			const res = await axios.post(process.env.API_URL + 'auth/signin', {
+				email: data.get('email'),
+				password: data.get('password')
+			});
+			const token = res.data;
 			setCookies('jwt', token.accessToken);
-			router.push('/')
+			router.push('/');
+			return;
 		} catch (error) {
-			return <div>An error occured (token)</div>;
+			if (typeof error.response.data.message === 'string') {
+				setMessage(error.response.data.message);
+			} else {
+				setMessage(error.response.data.message[0]);
+			}
+			setSeverity('error');
+			setNotif(false);
+			setNotif(true);
+			return;
 		}
 	};
 
@@ -42,7 +64,7 @@ const SignUp = () => {
 	}
 	return (
 		<>
-			<Header fixed={false} scrollbar={false}/>
+			<Header fixed={false} />
 			<ThemeProvider theme={theme}>
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />
@@ -123,6 +145,7 @@ const SignUp = () => {
 					</Box>
 				</Container>
 			</ThemeProvider>
+			{notif && <Notification message={message} severity={severity} />}
 		</>
 	);
 }

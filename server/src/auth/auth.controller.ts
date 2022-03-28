@@ -18,16 +18,6 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 export class AuthController {
 	constructor(private readonly authService: AuthService) { }
 
-	@Get('users')
-	async index() {
-		return await this.authService.findAll();
-	}
-
-	@Get('users/:id')
-	async find(@Param('id') id: string) {
-		return await this.authService.findOne(id);
-	}
-
 	@Post('signup')
 	async signUp(
 		@Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto
@@ -39,11 +29,5 @@ export class AuthController {
 	@Post('signin')
 	async signIn(@Req() req) {
 		return this.authService.signIn(req.user);
-	}
-
-	@UseGuards(JwtAuthGuard)
-	@Get('me')
-	getMe(@Req() req) {
-		return req.user;
 	}
 }

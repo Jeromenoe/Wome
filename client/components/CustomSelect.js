@@ -29,7 +29,7 @@ const CustomSelect = ({ filterTypeItem, items, value = '', search = false }) => 
 	}
 	return (
 		<>
-		<Box sx={{ minWidth: 120 }}>
+		<Box sx={{ minWidth: 140 }}>
 			<FormControl fullWidth size="small">
 				<InputLabel id="demo-simple-select-label">Type</InputLabel>
 				<Select
