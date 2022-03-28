@@ -115,7 +115,7 @@ const SignUp = () => {
 							<Grid container justifyContent="flex-end">
 								<Grid item>
 									<Link href="signin" variant="body2" onClick={goToSignIn}>
-										Vous avez déjà un compte? Se connecter
+										{"Vous avez déjà un compte? Se connecter"} 
 									</Link>
 								</Grid>
 							</Grid>

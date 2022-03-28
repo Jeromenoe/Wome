@@ -6,44 +6,14 @@ import axios from 'axios';
 import FilterActivities from '../components/FilterActivities';
 
 function App({ activities, error }) {
-	if (error) {
-		return <div>An error occured: {error.message}</div>;
-	}
-	
 	const [scrollbar, setScrollbar] = useState(true);
 	const activityTypes = [];
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(0);
-	activities = activities.map(activity => {
-		activity.img = Imgs[activity.type];
-		if (!activityTypes.includes(activity.type)) {
-			activityTypes.push(activity.type);
-		}
-		if (activity.price < minPrice) {
-			setMinPrice(activity.price);
-		}
-		if (activity.price > maxPrice) {
-			setMaxPrice(activity.price);
-		}
-		return activity;
-	})
-
 	const [activityItems, setActivityItems] = useState(activities);
 	const [filterType, setFilterType] = useState('all');
 	const [filterCity, setFilterCity] = useState('');
 	const [filterPrice, setFilterPrice] = useState([minPrice, maxPrice]);
-
-	const filterTypeItem = (type) => {
-		setFilterType(type);
-	};
-
-	const filterCityItem = (text) => {
-		setFilterCity(text);
-	}
-
-	const filterPriceItem = (prices) => {
-		setFilterPrice(prices);
-	}
 
 	useEffect(() => {
 		setActivityItems(activities);
@@ -64,6 +34,40 @@ function App({ activities, error }) {
 		setActivityItems(newActivityItems);
 	}, [filterType, filterCity, filterPrice]);
 	
+	console.log(activities);
+	console.log(error);
+	
+	if (error) {
+		return <div>An error occured: {error.message}</div>;
+	}
+	
+	activities = activities.map(activity => {
+		activity.img = Imgs[activity.type];
+		if (!activityTypes.includes(activity.type)) {
+			activityTypes.push(activity.type);
+		}
+		if (activity.price < minPrice) {
+			setMinPrice(activity.price);
+		}
+		if (activity.price > maxPrice) {
+			setMaxPrice(activity.price);
+		}
+		return activity;
+	})
+
+	
+	const filterTypeItem = (type) => {
+		setFilterType(type);
+	};
+
+	const filterCityItem = (text) => {
+		setFilterCity(text);
+	}
+
+	const filterPriceItem = (prices) => {
+		setFilterPrice(prices);
+	}
+
 	return (
 		<>
 			<Header fixed={true} scrollbar={scrollbar}/>
@@ -96,13 +100,13 @@ function App({ activities, error }) {
 
 
 
-App.getInitialProps = async ctx => {
+export const getServerSideProps = async ctx => {
 	try {
 		const res = await axios.get('http://localhost:3001/activities');
 		const activities = res.data;
-		return { activities };
+		return { props: { activities }};
 	} catch (error) {
-		return { error };
+		return { props: { error }};
 	}
 };
 

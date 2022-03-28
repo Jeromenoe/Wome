@@ -17,6 +17,8 @@ const cookieToJson = (cookie) => {
 }
 
 const Services = ({ activities, token, error }) => {
+	const [scrollbar, setScrollbar] = useState(true);
+	const [services, setServices] = useState(activities);
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
 	}
@@ -24,8 +26,7 @@ const Services = ({ activities, token, error }) => {
 		activity.img = Imgs[activity.type];
 		return activity;
 	});
-	const [scrollbar, setScrollbar] = useState(true);
-	const [services, setServices] = useState(activities);
+	
 
 	const handleAddService = async (service) => {
 		await axios.post('http://localhost:3001/activities', {...service}, {
