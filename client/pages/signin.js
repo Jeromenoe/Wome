@@ -23,7 +23,7 @@ const SignIn = () => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
 		try {
-			const res = await axios.post('http://localhost:3001/auth/signin', {
+			const res = await axios.post(process.env.API_URL + 'auth/signin', {
 				email: data.get('email'),
 				password: data.get('password')
 			});
@@ -94,7 +94,7 @@ const SignIn = () => {
 							<Grid container justifyContent="flex-end">
 								<Grid item>
 									<Link href="signup" variant="body2" onClick={goToSignUp}>
-										Vous n'avez pas de compte? S'inscrire
+										{"Vous n'avez pas de compte? S'inscrire"}
 									</Link>
 								</Grid>
 							</Grid>

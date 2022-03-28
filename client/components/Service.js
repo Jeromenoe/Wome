@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 const Service = ({ activity, handleDeleteService }) => {
 	const [itemId, setItemId] = useState('');
-	const [top, setTop] = useState(0);
 	const deleteItem = (e) => {
 		handleDeleteService(e.target.value);
 	}

@@ -14,7 +14,7 @@ function App({ activities, error }) {
 	const [filterType, setFilterType] = useState('all');
 	const [filterCity, setFilterCity] = useState('');
 	const [filterPrice, setFilterPrice] = useState([minPrice, maxPrice]);
-
+	
 	useEffect(() => {
 		setActivityItems(activities);
 		let newActivityItems = activities;
@@ -33,9 +33,6 @@ function App({ activities, error }) {
 		}
 		setActivityItems(newActivityItems);
 	}, [filterType, filterCity, filterPrice]);
-	
-	console.log(activities);
-	console.log(error);
 	
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
@@ -102,7 +99,7 @@ function App({ activities, error }) {
 
 export const getServerSideProps = async ctx => {
 	try {
-		const res = await axios.get('http://localhost:3001/activities');
+		const res = await axios.get(process.env.API_URL + 'activities');
 		const activities = res.data;
 		return { props: { activities }};
 	} catch (error) {

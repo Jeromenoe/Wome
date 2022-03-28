@@ -29,13 +29,13 @@ const Services = ({ activities, token, error }) => {
 	
 
 	const handleAddService = async (service) => {
-		await axios.post('http://localhost:3001/activities', {...service}, {
+		await axios.post(process.env.API_URL + 'activities', {...service}, {
 			headers: {
 				'Content-type': 'application/json',
 				'Authorization': `Bearer ${token}`
 			},
 		})
-		const resActivities = await axios.get('http://localhost:3001/activities/getByUser', {
+		const resActivities = await axios.get(process.env.API_URL + 'activities/getByUser', {
 				headers: {
 					'Authorization': `Bearer ${token}`
 				}
@@ -48,13 +48,13 @@ const Services = ({ activities, token, error }) => {
 	}
 
 	const handleDeleteService = async (activtyId) => {
-		await axios.delete(`http://localhost:3001/activities/${activtyId}`, {
+		await axios.delete(process.env.API_URL + `activities/${activtyId}`, {
 			headers: {
 				'Content-type': 'application/json',
 				'Authorization': `Bearer ${token}`
 			},
 		})
-		const resActivities = await axios.get('http://localhost:3001/activities/getByUser', {
+		const resActivities = await axios.get( process.env.API_URL + 'activities/getByUser', {
 				headers: {
 					'Authorization': `Bearer ${token}`
 				}
@@ -111,7 +111,7 @@ Services.getInitialProps = async ({ req }) => {
 		} else {
 			token = getCookie('jwt');
 		}
-		const res = await axios.get('http://localhost:3001/activities/getByUser',
+		const res = await axios.get(process.env.API_URL + 'activities/getByUser',
 			{
 				headers: {
 					'Authorization': `Bearer ${token}`

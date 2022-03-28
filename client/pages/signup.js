@@ -25,7 +25,7 @@ const SignUp = () => {
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
 		try {
-			await axios.post('http://localhost:3001/auth/signup', {
+			await axios.post(process.env.API_URL + 'auth/signup', {
 				email: data.get('email'),
 				password: data.get('password')
 			});
