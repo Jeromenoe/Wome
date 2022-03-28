@@ -4,11 +4,9 @@ import { useState } from 'react'
 
 const Service = ({ activity, handleDeleteService }) => {
 	const [itemId, setItemId] = useState('');
+	const [top, setTop] = useState(0);
 	const deleteItem = (e) => {
 		handleDeleteService(e.target.value);
-	}
-	const updateItem = (e) => {
-		console.log(e.target.value);
 	}
 	return (
 		<>
@@ -27,7 +25,6 @@ const Service = ({ activity, handleDeleteService }) => {
 				<div className='update-container' ></div>}
 				{activity._id == itemId && 
 				<div className='update-btn' onMouseLeave={() => setItemId('')}>
-					<button className="update btn" onClick={updateItem} value={activity._id}>Modifier</button>
 					<button className="delete btn" onClick={deleteItem} value={activity._id}>Supprimer</button>
 				</div>}
 			</div>
@@ -85,6 +82,20 @@ const Service = ({ activity, handleDeleteService }) => {
 					opacity: 1;
 					border: solid 1px #c70505;
 
+				}
+				.update-popup {
+					transition:visibility 0.2s linear,opacity 0.2s linear;
+					background-color: rgba(0, 0, 0, 0.7);
+					position: absolute;
+					left: 0; 
+					top: ${top}px;
+					width: 100%;
+					height: 100%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					z-index: 110;
+					overflow: hidden;
 				}
 			`}</style>
 		</>
