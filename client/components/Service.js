@@ -82,20 +82,6 @@ const Service = ({ activity, handleDeleteService }) => {
 					border: solid 1px #c70505;
 
 				}
-				.update-popup {
-					transition:visibility 0.2s linear,opacity 0.2s linear;
-					background-color: rgba(0, 0, 0, 0.7);
-					position: absolute;
-					left: 0; 
-					top: ${top}px;
-					width: 100%;
-					height: 100%;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					z-index: 110;
-					overflow: hidden;
-				}
 			`}</style>
 		</>
 	);
