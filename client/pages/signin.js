@@ -109,7 +109,8 @@ const SignIn = () => {
 SignIn.getInitialProps = async ({ req, res }) => {
 	if (req) {
 		res.setHeader('Set-Cookie', 'jwt=deleted;');
-	} 
+	}
+	return {};
 };
 
 

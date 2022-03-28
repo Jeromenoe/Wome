@@ -1,12 +1,14 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CustomSelect from './CustomSelect'
+import imgs from '../data/imgs'
 
 const CardService = ({ onAdd, setScrollbar }) => {
 	const [city, setCity] = useState('');
 	const [type, setType] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState('');
+	const [items, setItems] = useState([])
 
 
 	const onSubmit = (e) => {
@@ -22,6 +24,13 @@ const CardService = ({ onAdd, setScrollbar }) => {
 	const handleType = (type) => {
 		setType(type);
 	}
+	useEffect(() => {
+		const newItems = [];
+		for (const img in imgs) {
+			newItems.push(img);
+		}
+		setItems(newItems);
+	}, [])
 
 	return (
 		<>
@@ -30,7 +39,7 @@ const CardService = ({ onAdd, setScrollbar }) => {
 				<div className='form-control first-line'>
 					<input type="text" id="city" placeholder="Ville de l'activité" title="Ville" value={city}
 					onChange={(e) => setCity(e.target.value)} style={{marginRight: '20px'}}></input>
-					<CustomSelect filterTypeItem={handleType} items={['yoga', 'velo']} value={type} setScrollbar={setScrollbar}/>
+					<CustomSelect filterTypeItem={handleType} items={items} value={type} setScrollbar={setScrollbar}/>
 				</div>
 				<div className='form-control'>
 					<textarea type="text" id="description" placeholder="Description de l'activité" title="Description"

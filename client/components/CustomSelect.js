@@ -35,7 +35,6 @@ const CustomSelect = ({ filterTypeItem, items, value = '', setScrollbar }) => {
 					label="Type"
 					onChange={handleChange}
 				>
-					<MenuItem value="all">Tout</MenuItem>
 					{items.map(item => {
 						return (
 							<MenuItem value={item} key={item}>{item.charAt(0).toUpperCase() + item.slice(1)}</MenuItem>

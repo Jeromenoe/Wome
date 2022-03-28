@@ -19,7 +19,7 @@ import { setCookies, removeCookies } from 'cookies-next'
 
 const theme = createTheme();
 
-export default function SignUp() {
+const SignUp = () => {
 	const router = useRouter()
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -131,4 +131,7 @@ SignUp.getInitialProps = async ({ req, res }) => {
 	if (req) {
 		res.setHeader('Set-Cookie', 'jwt=deleted;');
 	}
+	return {};
 }; 
+
+export default SignUp;
