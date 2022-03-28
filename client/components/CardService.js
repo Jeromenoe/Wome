@@ -10,15 +10,9 @@ const CardService = ({ onAdd }) => {
 	const [price, setPrice] = useState('');
 	const [items, setItems] = useState([])
 
-
 	const onSubmit = (e) => {
 		e.preventDefault()
-		console.log(city, type, description);
 		onAdd({ city, type, description, price: parseInt(price) })
-		setCity('')
-		setType('')
-		setDescription('')
-		setPrice('')
 	}
 
 	const handleType = (type) => {

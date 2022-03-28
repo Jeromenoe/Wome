@@ -22,6 +22,7 @@ const Services = ({ activities, token, error }) => {
 	const [notif, setNotif] = React.useState(false);
 	const [message, setMessage] = React.useState('');
 	const [severity, setSeverity] = React.useState('');
+	const [resetParams, setResetParams] = React.useState(true);
 
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
@@ -52,6 +53,8 @@ const Services = ({ activities, token, error }) => {
 			setServices(newActivities);
 			setMessage('Prestation ajoutée !');
 			setSeverity('success');
+			setResetParams(false);
+			setResetParams(true);
 			setNotif(false);
 			setNotif(true);
 		} catch (error) {
@@ -109,7 +112,7 @@ const Services = ({ activities, token, error }) => {
 				<div className="services-container">
 					<div className="card-service-container">
 						<h1>Prestation</h1>
-						<CardService onAdd={handleAddService} />
+						{resetParams && <CardService onAdd={handleAddService} />}
 					</div>
 					<Activities activityItems={services} isChangeable='true' handleDeleteService={handleDeleteService}/>
 				</div>
