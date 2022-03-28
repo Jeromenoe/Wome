@@ -5,6 +5,7 @@ import Activities from "../components/Activities";
 import Imgs from "../data/imgs";
 import { getCookie } from 'cookies-next';
 import CardService from "../components/CardService";
+import Notification from '../components/Notification';
 
 const cookieToJson = (cookie) => {
 	var output = {};
@@ -18,6 +19,10 @@ const cookieToJson = (cookie) => {
 
 const Services = ({ activities, token, error }) => {
 	const [services, setServices] = useState(activities);
+	const [notif, setNotif] = React.useState(false);
+	const [message, setMessage] = React.useState('');
+	const [severity, setSeverity] = React.useState('');
+
 	if (error) {
 		return <div>An error occured: {error.message}</div>;
 	}
@@ -28,41 +33,73 @@ const Services = ({ activities, token, error }) => {
 	
 
 	const handleAddService = async (service) => {
-		await axios.post(process.env.API_URL + 'activities', {...service}, {
-			headers: {
-				'Content-type': 'application/json',
-				'Authorization': `Bearer ${token}`
-			},
-		})
-		const resActivities = await axios.get(process.env.API_URL + 'activities/getByUser', {
+		try {
+			await axios.post(process.env.API_URL + 'activities', {...service}, {
 				headers: {
+					'Content-type': 'application/json',
 					'Authorization': `Bearer ${token}`
-				}
-		});
-		const newActivities = resActivities.data.map(activity => {
-			activity.img = Imgs[activity.type];
-			return activity;
-		});
-		setServices(newActivities);
+				},
+			})
+			const resActivities = await axios.get(process.env.API_URL + 'activities/getByUser', {
+					headers: {
+						'Authorization': `Bearer ${token}`
+					}
+			});
+			const newActivities = resActivities.data.map(activity => {
+				activity.img = Imgs[activity.type];
+				return activity;
+			});
+			setServices(newActivities);
+			setMessage('Prestation ajoutée !');
+			setSeverity('success');
+			setNotif(false);
+			setNotif(true);
+		} catch (error) {
+			if (typeof error.response.data.message === 'string') {
+				setMessage(error.response.data.message);
+			} else {
+				setMessage(error.response.data.message[0]);
+			}
+			setSeverity('error');
+			setNotif(false);
+			setNotif(true);
+			return;
+		}
 	}
 
 	const handleDeleteService = async (activtyId) => {
-		await axios.delete(process.env.API_URL + `activities/${activtyId}`, {
-			headers: {
-				'Content-type': 'application/json',
-				'Authorization': `Bearer ${token}`
-			},
-		})
-		const resActivities = await axios.get( process.env.API_URL + 'activities/getByUser', {
+		try {
+			await axios.delete(process.env.API_URL + `activities/${activtyId}`, {
 				headers: {
+					'Content-type': 'application/json',
 					'Authorization': `Bearer ${token}`
-				}
-		});
-		const newActivities = resActivities.data.map(activity => {
-			activity.img = Imgs[activity.type];
-			return activity;
-		});
-		setServices(newActivities);
+				},
+			})
+			const resActivities = await axios.get( process.env.API_URL + 'activities/getByUser', {
+					headers: {
+						'Authorization': `Bearer ${token}`
+					}
+			});
+			const newActivities = resActivities.data.map(activity => {
+				activity.img = Imgs[activity.type];
+				return activity;
+			});
+			setServices(newActivities);
+			setMessage('Prestation supprimée !');
+			setSeverity('success');
+			setNotif(false);
+			setNotif(true);
+		} catch (error) {
+			if (typeof error.response.data.message === 'string') {
+				setMessage(error.response.data.message);
+			} else {
+				setMessage(error.response.data.message[0]);
+			}
+			setSeverity('error');
+			setNotif(false);
+			setNotif(true);
+			return;
+		}
 	}
 
 	return (
@@ -77,6 +114,7 @@ const Services = ({ activities, token, error }) => {
 					<Activities activityItems={services} isChangeable='true' handleDeleteService={handleDeleteService}/>
 				</div>
 			</div>
+			{notif && <Notification message={message} severity={severity} />}
 			<style jsx>{`
 				.main {
 					margin-top: 110px;
