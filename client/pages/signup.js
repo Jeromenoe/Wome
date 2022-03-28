@@ -42,7 +42,7 @@ export default function SignUp() {
 	}
 	return (
 		<>
-			<Header fixed={false}/>
+			<Header fixed={false} scrollbar={false}/>
 			<ThemeProvider theme={theme}>
 				<Container component="main" maxWidth="xs">
 					<CssBaseline />

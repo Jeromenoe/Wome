@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import CustomSelect from './CustomSelect'
 
-const CardService = ({ onAdd }) => {
+const CardService = ({ onAdd, setScrollbar }) => {
 	const [city, setCity] = useState('');
 	const [type, setType] = useState('');
 	const [description, setDescription] = useState('');
@@ -30,7 +30,7 @@ const CardService = ({ onAdd }) => {
 				<div className='form-control first-line'>
 					<input type="text" id="city" placeholder="Ville de l'activité" title="Ville" value={city}
 					onChange={(e) => setCity(e.target.value)} style={{marginRight: '20px'}}></input>
-					<CustomSelect filterTypeItem={handleType} items={['yoga', 'velo']} value={type}/>
+					<CustomSelect filterTypeItem={handleType} items={['yoga', 'velo']} value={type} setScrollbar={setScrollbar}/>
 				</div>
 				<div className='form-control'>
 					<textarea type="text" id="description" placeholder="Description de l'activité" title="Description"

@@ -6,7 +6,7 @@ import ProfileBtn from "./ProfileBtn";
 import { useRouter } from "next/router";
 import { checkCookies, getCookie } from 'cookies-next'
 
-const Header = ({ fixed }) => {
+const Header = ({ fixed, scrollbar }) => {
 	const router = useRouter()
 	let token = false;
 	const goToHome = (e) => {
@@ -18,6 +18,7 @@ const Header = ({ fixed }) => {
 			token = true;
 		}
 	}
+	
 	return (
 		<>
 			<div className="header">
@@ -47,6 +48,7 @@ const Header = ({ fixed }) => {
 				grid-template-columns: repeat(3, 1fr);
 				grid-gap: 10px;
 				grid-auto-rows: minmax(70px, auto);
+				padding-right: ${scrollbar ? '' : '15px'}; 
 			}
 			.bar {
 				width: 100%;

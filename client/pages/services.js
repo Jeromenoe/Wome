@@ -24,6 +24,7 @@ const Services = ({ activities, token, error }) => {
 		activity.img = Imgs[activity.type];
 		return activity;
 	});
+	const [scrollbar, setScrollbar] = useState(true);
 	const [services, setServices] = useState(activities);
 
 	const handleAddService = async (service) => {
@@ -66,12 +67,12 @@ const Services = ({ activities, token, error }) => {
 
 	return (
 		<>
-			<Header fixed={true} />
+			<Header fixed={true} scrollbar={scrollbar}/>
 			<div className='main' >
 				<div className="services-container">
 					<div className="card-service-container">
 						<h1>Prestation</h1>
-						<CardService onAdd={handleAddService}/>
+						<CardService onAdd={handleAddService} setScrollbar={setScrollbar}/>
 					</div>
 					<Activities activityItems={services} isChangeable='true' handleDeleteService={handleDeleteService}/>
 				</div>
